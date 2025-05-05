@@ -8,7 +8,13 @@ export default {
 
     data() {
         return {
-            ingredients: ['Alho', 'Manteiga', 'Orégano', 'Ovos']
+            ingredients: [] as string[]
+        }
+    },
+
+    methods: {
+        addIngredient(ingredient: string) {
+            this.ingredients.push(ingredient)
         }
     }
 }
@@ -18,7 +24,7 @@ export default {
     <main class="conteudo-principal">
         <YourList :ingredients="ingredients"/>
 
-        <SelectIngredients />
+        <SelectIngredients @selected-ingredient="addIngredient"/>
     </main>
 </template>
 
