@@ -24,7 +24,7 @@ export default {
     <main class="conteudo-principal">
         <YourList :ingredients="ingredients"/>
 
-        <SelectIngredients @selected-ingredient="addIngredient"/>
+        <SelectIngredients @add-ingredient="addIngredient"/>
     </main>
 </template>
 
