@@ -11,23 +11,28 @@ export default {
         }
     },
     components: { SelectableIngredient },
-    emits: ['addIngredient']
+    emits: ['addIngredient', 'removeIngredient']
 }
 </script>
 
 <template>
-   <article class="categoria">
+    <article class="categoria">
         <header class="categoria__cabecalho">
-            <img :src="`/public/imagens/icones/categorias_ingredientes/${category.imagem}`" alt="" class="categoria__imagem">
+            <img :src="`/public/imagens/icones/categorias_ingredientes/${category.imagem}`" alt=""
+                class="categoria__imagem">
             <h2 class="paragrafp-lg categoria__nome">{{ category.nome }}</h2>
         </header>
 
         <ul class="categoria__ingredientes">
             <li v-for="ingrediente in category.ingredientes" :key="ingrediente">
-               <SelectableIngredient :ingredient="ingrediente" @add-ingredient="$emit('addIngredient', $event)"/>
+                <SelectableIngredient 
+                    :ingredient="ingrediente" 
+                    @add-ingredient="$emit('addIngredient', $event)" 
+                    @remove-ingredient="$emit('removeIngredient', $event)"
+                />
             </li>
         </ul>
-   </article>
+    </article>
 </template>
 
 <style scoped>

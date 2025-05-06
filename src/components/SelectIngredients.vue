@@ -14,7 +14,7 @@ export default {
         this.categories = await getCategories();
     },
     components: { CardCategory },
-    emits: ['addIngredient']
+    emits: ['addIngredient', 'removeIngredient']
 }
 </script>
 
@@ -28,7 +28,11 @@ export default {
 
         <ul class="categorias">
             <li v-for="category in categories" :key="category.nome">
-                <CardCategory :category="category" @add-ingredient="$emit('addIngredient', $event)" />
+                <CardCategory 
+                    :category="category" 
+                    @add-ingredient="$emit('addIngredient', $event)" 
+                    @remove-ingredient="$emit('removeIngredient', $event)"
+                />
             </li>
         </ul>
 

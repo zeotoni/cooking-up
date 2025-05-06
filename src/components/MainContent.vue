@@ -15,6 +15,11 @@ export default {
     methods: {
         addIngredient(ingredient: string) {
             this.ingredients.push(ingredient)
+        },
+
+        removeIngredient(ingredient: string) {
+            const index = this.ingredients.findIndex(i => i === ingredient);
+            this.ingredients.splice(index, 1);
         }
     }
 }
@@ -22,9 +27,9 @@ export default {
 
 <template>
     <main class="conteudo-principal">
-        <YourList :ingredients="ingredients"/>
+        <YourList :ingredients="ingredients" />
 
-        <SelectIngredients @add-ingredient="addIngredient"/>
+        <SelectIngredients @add-ingredient="addIngredient" @remove-ingredient="removeIngredient" />
     </main>
 </template>
 
