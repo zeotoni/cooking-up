@@ -24,18 +24,29 @@ export default {
     <section class="selecionar-receitas">
         <h1 class="cabecalho titulo-receitas">Receitas</h1>
 
-        <p class="paragrafo-lg resultado">Resultados encontrados: 8</p>
-        <p class="paragrafo-lg instrucoes">
-            Veja as opções de receitas que encontramos com os receitas que você tem por aí!
-        </p>
+        <p class="paragrafo-lg resultado">Resultados encontrados: {{ recipes.length }}</p>
 
-        <ul class="receitas">
-            <li v-for="recipe in recipes" :key="recipe.nome">
-                <CardRecipe :recipe="recipe" />
-            </li>
-        </ul>
+        <div v-if="recipes.length">
+            <p class="paragrafo-lg instrucoes">
+                Veja as opções de receitas que encontramos com os receitas que você tem por aí!
+            </p>
 
-        <Button :btn-text="'Editar lista'" @click="$emit('editList')"/>
+            <ul class="receitas">
+                <li v-for="recipe in recipes" :key="recipe.nome">
+                    <CardRecipe :recipe="recipe" />
+                </li>
+            </ul>
+        </div>
+
+        <div v-else-if="!recipes.length">
+            <p class="paragrafo-lg instrucoes">
+                Ops, não encontramos resultados para sua combinação. Vamos tentar de novo?
+            </p>
+
+            <img class="imagem-sem-receita" src="../assets/images/sem-receitas.png" alt="ovo quebrado">
+        </div>
+
+        <Button :btn-text="'Editar lista'" @click="$emit('editList')" />
     </section>
 </template>
 
@@ -79,5 +90,13 @@ export default {
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
+}
+
+.imagem-sem-receita {
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 2rem;
 }
 </style>
