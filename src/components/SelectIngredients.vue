@@ -69,12 +69,5 @@ export default {
 
 .dica {
     align-self: flex-start;
-    margin-bottom: 3.5rem;
-}
-
-@media only screen and (max-width: 767px) {
-    .dica {
-        margin-bottom: 2.5rem;
-    }
 }
 </style>
