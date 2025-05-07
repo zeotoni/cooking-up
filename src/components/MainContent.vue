@@ -8,7 +8,7 @@ import ShowRecipes from './ShowRecipes.vue';
 type Page = 'SelectIngredients' | 'ShowRecipes';
 
 export default {
-    components: { SelectIngredients, Tag, YourList, Button,ShowRecipes },
+    components: { SelectIngredients, Tag, YourList, Button, ShowRecipes },
 
     data() {
         return {
@@ -37,13 +37,12 @@ export default {
     <main class="conteudo-principal">
         <YourList :ingredients="ingredients" />
 
-        <SelectIngredients v-if="content === 'SelectIngredients'" 
-            @add-ingredient="addIngredient" 
-            @remove-ingredient="removeIngredient" 
-            @search-recipes="navigate('ShowRecipes')" 
-        />
+        <KeepAlive include="SelectIngredients">
+            <SelectIngredients v-if="content === 'SelectIngredients'" @add-ingredient="addIngredient"
+                @remove-ingredient="removeIngredient" @search-recipes="navigate('ShowRecipes')" />
 
-        <ShowRecipes v-else-if="content === 'ShowRecipes'" @edit-list="navigate('SelectIngredients')"/>
+            <ShowRecipes v-else-if="content === 'ShowRecipes'" @edit-list="navigate('SelectIngredients')" />
+        </KeepAlive>
     </main>
 </template>
 
