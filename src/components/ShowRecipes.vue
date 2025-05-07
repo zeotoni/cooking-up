@@ -14,7 +14,8 @@ export default {
     async created() {
         this.recipes = await getRecipes();
     },
-    components: { Button, CardRecipe }
+    components: { Button, CardRecipe },
+    emits: ['editList']
 }
 
 </script>
@@ -34,7 +35,7 @@ export default {
             </li>
         </ul>
 
-        <Button :btn-text="'Editar lista'" />
+        <Button :btn-text="'Editar lista'" @click="$emit('editList')"/>
     </section>
 </template>
 

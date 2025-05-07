@@ -43,7 +43,7 @@ export default {
             @search-recipes="navigate('ShowRecipes')" 
         />
 
-        <ShowRecipes v-else-if="content === 'ShowRecipes'"/>
+        <ShowRecipes v-else-if="content === 'ShowRecipes'" @edit-list="navigate('SelectIngredients')"/>
     </main>
 </template>
 
