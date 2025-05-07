@@ -15,7 +15,7 @@ export default {
         this.categories = await getCategories();
     },
     components: { CardCategory, Button },
-    emits: ['addIngredient', 'removeIngredient']
+    emits: ['addIngredient', 'removeIngredient', 'SearchRecipes']
 }
 </script>
 
@@ -38,7 +38,7 @@ export default {
             *Atenção: consideramos que você tem em casa sal, pimenta e água.
         </p>
 
-        <Button :btn-text="'Buscar receitas!'" />
+        <Button :btn-text="'Buscar receitas!'" @click="$emit('SearchRecipes')"/>
     </section>
 </template>
 
