@@ -1,6 +1,7 @@
 <script lang="ts">
 import { getCategories } from '@/http/index';
 import type ICategory from '@/interfaces/ICategory';
+import Button from '../components/Button.vue';
 import CardCategory from '../components/CardCategory.vue';
 
 export default {
@@ -13,7 +14,7 @@ export default {
     async created() {
         this.categories = await getCategories();
     },
-    components: { CardCategory },
+    components: { CardCategory, Button },
     emits: ['addIngredient', 'removeIngredient']
 }
 </script>
@@ -28,17 +29,16 @@ export default {
 
         <ul class="categorias">
             <li v-for="category in categories" :key="category.nome">
-                <CardCategory 
-                    :category="category" 
-                    @add-ingredient="$emit('addIngredient', $event)" 
-                    @remove-ingredient="$emit('removeIngredient', $event)"
-                />
+                <CardCategory :category="category" @add-ingredient="$emit('addIngredient', $event)"
+                    @remove-ingredient="$emit('removeIngredient', $event)" />
             </li>
         </ul>
 
         <p class="paragrafo dica">
             *Atenção: consideramos que você tem em casa sal, pimenta e água.
         </p>
+
+        <Button :btn-text="'Buscar receitas!'" />
     </section>
 </template>
 
@@ -69,5 +69,13 @@ export default {
 
 .dica {
     align-self: flex-start;
+    margin-bottom: 3.5rem;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .dica {
+        margin-bottom: 2.5rem;
+    }
 }
 </style>

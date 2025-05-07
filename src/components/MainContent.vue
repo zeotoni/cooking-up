@@ -4,6 +4,7 @@ import SelectIngredients from '../components/SelectIngredients.vue';
 import Tag from '../components/Tag.vue';
 import YourList from '../components/YourList.vue';
 
+
 export default {
     components: { SelectIngredients, Tag, YourList, Button },
 
@@ -31,8 +32,6 @@ export default {
         <YourList :ingredients="ingredients" />
 
         <SelectIngredients @add-ingredient="addIngredient" @remove-ingredient="removeIngredient" />
-
-        <Button :btn-text="'Buscar receitas!'"/>
     </main>
 </template>
 

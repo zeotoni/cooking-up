@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
     props: {
-        btnText: String
+        btnText: { String, required: true }
     }
 }
 </script>
@@ -27,13 +27,15 @@ export default {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    
+
     border-radius: 32px;
     box-shadow: 4px 4px 15px 0px rgba(255, 115, 76, 0.25);
+
+    transition: 0.2s;
+    cursor: pointer;
 }
 
 .btn:hover {
-    cursor: pointer;
     background-color: var(--ocre);
 }
 </style>
