@@ -41,7 +41,7 @@ export default {
             <SelectIngredients v-if="content === 'SelectIngredients'" @add-ingredient="addIngredient"
                 @remove-ingredient="removeIngredient" @search-recipes="navigate('ShowRecipes')" />
 
-            <ShowRecipes v-else-if="content === 'ShowRecipes'" @edit-list="navigate('SelectIngredients')" />
+            <ShowRecipes v-else-if="content === 'ShowRecipes'" @edit-list="navigate('SelectIngredients')" :ingredients="ingredients"/>
         </KeepAlive>
     </main>
 </template>

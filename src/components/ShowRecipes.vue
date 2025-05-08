@@ -1,18 +1,28 @@
 <script lang="ts">
 import { getRecipes } from '@/http';
 import type ICategory from '@/interfaces/ICategory';
+import type { PropType } from 'vue';
 import Button from '../components/Button.vue';
 import CardRecipe from '../components/CardRecipe.vue';
 
 export default {
+    props: {
+        ingredients: {
+            type: Array as PropType<string[]>,
+            required: true
+        }
+    },
     data() {
         return {
-            recipes: [] as ICategory[]
+            recipesFound: [] as ICategory[]
         }
     },
 
     async created() {
-        this.recipes = await getRecipes();
+        const recipes = await getRecipes();
+        this.recipesFound = recipes.filter((recipe) => {
+            return recipe.ingredientes.every(ingredient => this.ingredients.includes(ingredient));
+        });
     },
     components: { Button, CardRecipe },
     emits: ['editList']
@@ -24,21 +34,21 @@ export default {
     <section class="selecionar-receitas">
         <h1 class="cabecalho titulo-receitas">Receitas</h1>
 
-        <p class="paragrafo-lg resultado">Resultados encontrados: {{ recipes.length }}</p>
+        <p class="paragrafo-lg resultado">Resultados encontrados: {{ recipesFound.length }}</p>
 
-        <div v-if="recipes.length">
+        <div v-if="recipesFound.length">
             <p class="paragrafo-lg instrucoes">
                 Veja as opções de receitas que encontramos com os receitas que você tem por aí!
             </p>
 
             <ul class="receitas">
-                <li v-for="recipe in recipes" :key="recipe.nome">
+                <li v-for="recipe in recipesFound" :key="recipe.nome">
                     <CardRecipe :recipe="recipe" />
                 </li>
             </ul>
         </div>
 
-        <div v-else-if="!recipes.length">
+        <div v-else-if="!recipesFound.length">
             <p class="paragrafo-lg instrucoes">
                 Ops, não encontramos resultados para sua combinação. Vamos tentar de novo?
             </p>
